@@ -161,7 +161,7 @@ function findItalianFood(allDishes) {
 function searchCuisines(allDishes) {
     alert("Searching for dishes by cuisine...")
     // TODO #3: Gather user input for a cuisine to search for, then filter for all dishes matching this cuisine type
-    let cuisineChoice = prompt("Hi, please choose your choice of cuisine!");
+    let cuisineChoice = prompt("Hi, please choose your choice of cuisine: ");
     let chosenCuisine = allDishes.filter(function(el) {
         if(el[cuisineChoice].includes(dishes.cuisine)){
             return true;
@@ -193,9 +193,23 @@ function searchIngredients(allDishes) {
 
 function generateCuisineDishName(allDishes) {
     alert("Combining cuisine and dish names...")
+    let userChoiceCuisine = prompt("Hi, please enter your cuisine choice: ");
+    let userChoiceDish = prompt("Hi, now enter your dish choice: ");
+    
+
     // TODO #5: Apply the concatenatorFunction to each dish in allDishes, then log to the console the modified result
+    let cuisineAndDishChoice = allDishes.filter(function(el){
+        if (el[userChoiceCuisine].concat(userChoiceDish))
+        {
+            return true;
+        }
+    });
     alert("Successfully combined cuisine and dish names!  Check the console for full output.")
+    return cuisineAndDishChoice;
+    
 }
+   
+
 
 // <<<<<<<<<<<<<<<<< EMAIL AND TEXT MARKETING MESSAGES <<<<<<<<<<<<<<<<<
 
