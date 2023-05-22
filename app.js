@@ -153,8 +153,9 @@ function findItalianFood(allDishes) {
     });
     
     alert("Found all Italian dishes!  Check the console for full output")
+    return results
 }
-console.log(findItalianFood(allDishes));
+
 
 
 function searchCuisines(allDishes) {
@@ -166,18 +167,29 @@ function searchCuisines(allDishes) {
             return true;
         }
     });
-    return chosenCuisine;}
+    
 
     alert("Found all dishes matching the cuisine search term!  Check the console for full output")
-    console.log(searchCuisines(allDishes));
-    
+    return chosenCuisine;
+}
+
 
 
 function searchIngredients(allDishes) {
     alert("Searching for dishes by ingredient...")
+    let userInputDish = prompt("Hi, please enter your dish choice: ");
     // TODO #4: Gather user input for an ingredient to search for, then filter for all dishes that INCLUDE this ingredient in their ingredients array property
     alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
+    let userInputIngredient = prompt("Hi, now enter your ingredient choice: ");
+    let foundDishIngredients = allDishes.filter(function(el){
+        if (el[userInputDish].includes(userInputIngredient))
+        {
+            return true;
+        }
+    });
+    return foundDishIngredients;
 }
+
 
 function generateCuisineDishName(allDishes) {
     alert("Combining cuisine and dish names...")
