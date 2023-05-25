@@ -163,9 +163,7 @@ function searchCuisines(allDishes) {
     // TODO #3: Gather user input for a cuisine to search for, then filter for all dishes matching this cuisine type
     let cuisineChoice = prompt("Hi, please choose your choice of cuisine: ");
     let chosenCuisine = allDishes.filter(function(el) {
-        if(el[cuisineChoice].includes(dishes.cuisine)){
-            return true;
-        }
+        return el.cuisine===cuisineChoice
     });
     
 
@@ -182,10 +180,7 @@ function searchIngredients(allDishes) {
     alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
     let userInputIngredient = prompt("Hi, now enter your ingredient choice: ");
     let foundDishIngredients = allDishes.filter(function(el){
-        if (el[userInputDish].includes(userInputIngredient))
-        {
-            return true;
-        }
+        return el.ingredients.includes(userInputIngredient)
     });
     return foundDishIngredients;
 }
@@ -199,10 +194,7 @@ function generateCuisineDishName(allDishes) {
 
     // TODO #5: Apply the concatenatorFunction to each dish in allDishes, then log to the console the modified result
     let cuisineAndDishChoice = allDishes.filter(function(el){
-        if (el[userChoiceCuisine].concat(userChoiceDish))
-        {
-            return true;
-        }
+        return el.cuisine + "" + el.name
     });
     alert("Successfully combined cuisine and dish names!  Check the console for full output.")
     return cuisineAndDishChoice;
@@ -215,51 +207,54 @@ function generateCuisineDishName(allDishes) {
 
 function emailMessage(dishOfTheDay) {
     // TODO #6: Adjust the message below so the cuisine and name of the dish are displayed
-    let message = `
-    Hello valued customer!
+    
+    let message = 
+    "Hello valued customer!"+
 
-    Thank you for subscribing to email alert messages!
-    Today's Dish of the day is:
+    "Thank you for subscribing to email alert messages!"+
+    "Today's Dish of the day is:"+ 
+    dishOfTheDay.cuisine+
 
-    <DISH OF THE DAY HERE>
+    //<DISH OF THE DAY HERE>
 
-    We hope to see you in soon!
+    "We hope to see you in soon!"+
 
-    Kindly,
-    Master Chef David
+    "Kindly,"+
+    "Master Chef David"+
 
-    (To unsubscribe hit the 'unsubscribe' button below)
-    `;
+    "(To unsubscribe hit the 'unsubscribe' button below)";
+    
 
     return message;
 }
 
 function textMessage(dishOfTheDay) {
     // TODO #6: Adjust the message below so the cuisine and name of the dish are displayed
-    let message = `
-    Master Chef -
+    let message = "Master Chef -"+
 
-    This is an automated text message alert.
-    Today's Dish of the day is:
+    "This is an automated text message alert."+
+    "Today's Dish of the day is:"+
 
-    <DISH OF THE DAY HERE>
+    dishOfTheDay.cuisine +
 
-    We hope to see you in soon!
+    "We hope to see you in soon!"+
 
-    Kindly,
-    Master Chef David
+    "Kindly,"+
+    "Master Chef David"+
 
-    Text STOP to stop all future messages.
+    "Text STOP to stop all future messages.";
     
-    `;
+    
     return message;
 }
 
 function generateMarketingMessage(dishOfTheDay, messageTypeCallback) {
     alert('Sending final message to all 389 customers...')
+    textMessage(dishOfTheDay,textMessage);
     // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
     // Then, log that result to the console
     alert('Success!  Check the console for a copy of the final marketing message!')
+console.log(dishOfTheDay,textMessage);
 }
 
 // <<<<<<<<<<<<<<<<< CUSTOM PROMPT FUNCTION <<<<<<<<<<<<<<<<<
@@ -309,10 +304,12 @@ function runApp(allDishes, specialDish) {
         case "6":
             // TODO #8: Call the appropriate function to generate the marketing text message.  
             // You will need to provide today's dish and the appropriate callback function as arguments!
+            generateMarketingMessage(dishOfTheDay,textMessage);
             break
         case "7":
             // TODO #9: Call the appropriate function to generate the marketing email message.  
             // You will need to provide today's dish and the appropriate callback function as arguments!
+            generateMarketingMessage(dishOfTheDay,emailMessage);
             break
         case "Exit":
             alert("Thank you for using the Recipe Searching Application!  Goodbye!")
